@@ -1,0 +1,15 @@
+<mat-toolbar class="basePanel" color="primary">
+    <header>
+        <span class="logo">NWPTS</span>
+    </header>
+    <nav>
+        <button mat-button [matMenuTriggerFor]="menu">
+            <span class="material-icons">table_rows</span>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="navigate('classroom')">教室頁面</button>
+            <button mat-menu-item *ngIf="!hasLogin" (click)="navigate('login')">助教登入</button>
+            <button mat-menu-item *ngIf="hasLogin" (click)="logout()">登出</button>
+        </mat-menu>
+    </nav>
+</mat-toolbar>

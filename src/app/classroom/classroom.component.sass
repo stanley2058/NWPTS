@@ -1,0 +1,46 @@
+nav
+    position: relative
+    top: 2em
+    width: 80vw
+    left: 11.5vw
+    display: grid
+    grid-template-columns: 150px 1fr
+    grid-template-areas: "sel num" "act num"
+
+    .selection
+        grid-area: sel
+        max-width: 150px
+    .action
+        grid-area: act
+        max-width: 150px
+        display: flex
+        flex-direction: column
+        button
+            margin-top: 10px
+    .waitingDisplay
+        padding-top: 20px
+        grid-area: num
+        text-align: center
+        h2
+            font-weight: bold
+        p
+            font-size: 3rem
+
+section
+    position: relative
+    top: 1em
+    width: 85vw
+    left: 11.5vw
+    a
+        text-decoration: none
+        font-weight: bold
+    h2, h3
+        font-weight: bold
+    h3
+        margin-top: 15px
+        margin-bottom: 0
+    li
+        b
+            background-color: greenyellow
+            margin-left: 3px
+            margin-right: 3px

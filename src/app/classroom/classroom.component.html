@@ -1,0 +1,49 @@
+<div class="basePanel">
+    <app-header></app-header>
+    <section>
+        <h2>系統操作方式</h2>
+        <h3>召喚助教前</h3>
+        <ul>
+            <li>
+                如果你遇到問題，可以先查閱<b>範例程式</b>和其他<b>線上文件</b>，例如：
+                <a href="https://www.w3schools.com/" target="_blank">W3Schools</a>
+                和
+                <a href="https://developer.mozilla.org/zh-TW/" target="_blank">MDN</a>
+                。
+            </li>
+            <li>
+                如果你要Demo，等待助教時可以自己先測試一遍確認功能跟<b>作業要求</b>的相同。
+            </li>
+        </ul>
+
+        <h3>開始召喚助教</h3>
+        <ol>
+            <li>選擇你的位子。</li>
+            <li>點擊<b>"呼叫助教"</b>按鈕。</li>
+            <li>等到等待人數歸零助教就會來找你了。</li>
+            <li>如果突然發現不需要助教時請點擊<b>"取消呼叫"</b>按鈕</li>
+        </ol>
+    </section>
+    <nav>
+        <mat-form-field appearance="fill" class="selection">
+            <mat-label>教室選擇</mat-label>
+            <mat-select [(value)]="classroomSelected">
+              <mat-option [value]="'203'">前教室 (203)</mat-option>
+              <mat-option [value]="'201'">後教室 (201)</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="action">
+            <button *ngIf="!isCalling" mat-raised-button color="primary">呼叫助教</button>
+            <button *ngIf="isCalling" mat-raised-button color="accent">取消呼叫</button>
+        </div>
+
+        <div class="waitingDisplay">
+            <h2>等待人數</h2>
+            <p>{{waitingNumber}}</p>
+        </div>
+    </nav>
+    <main>
+
+    </main>
+</div>
