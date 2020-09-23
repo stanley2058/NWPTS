@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "nwpts-afddc": {
+      "hosting": {
+        "NWPTS": [
+          "nwpts-afddc"
+        ]
+      }
+    }
+  }
+}

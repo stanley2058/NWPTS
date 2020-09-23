@@ -1,8 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // <-- Material Import -->
@@ -28,11 +26,30 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
+// <-- Firebase Import -->
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
+// <-- Component Import -->
+import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { ClassroomComponent } from './classroom/classroom.component';
 
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDzs9YIaf3Ncmgi0vhkePqCxFAOwplyec4",
+  authDomain: "nwpts-afddc.firebaseapp.com",
+  databaseURL: "https://nwpts-afddc.firebaseio.com",
+  projectId: "nwpts-afddc",
+  storageBucket: "nwpts-afddc.appspot.com",
+  messagingSenderId: "1078296659946",
+  appId: "1:1078296659946:web:4ae0887380c8d4fadb9493",
+  measurementId: "G-CP5ZW5WNX6"
+};
 
 @NgModule({
   declarations: [
@@ -67,7 +84,10 @@ import { ClassroomComponent } from './classroom/classroom.component';
     MatCardModule,
     MatExpansionModule,
     MatAutocompleteModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule, // firestore
+    AngularFireAuthModule, // auth
   ],
   providers: [
     { provide: LOCALE_ID, useValue: "zh-Hant" },
