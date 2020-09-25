@@ -1,0 +1,9 @@
+<div [ngSwitch]="entry">
+    <app-teacher    *ngSwitchCase="'teacher'"></app-teacher>
+    <app-door       *ngSwitchCase="'door'"></app-door>
+    <app-window     *ngSwitchCase="'window'"></app-window>
+    <app-blackboard *ngSwitchCase="'blackboard'"></app-blackboard>
+    <app-whiteboard *ngSwitchCase="'whiteboard'"></app-whiteboard>
+    <app-seat       *ngSwitchCase="'seat'"></app-seat>
+    <app-spacer     *ngSwitchDefault></app-spacer>
+</div>

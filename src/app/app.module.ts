@@ -38,6 +38,15 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { ClassroomComponent } from './classroom/classroom.component';
+import { ClassroomRendererComponent } from './classroom-renderer/classroom-renderer.component';
+import { SeatComponent } from './classroom-entities/seat/seat.component';
+import { TeacherComponent } from './classroom-entities/teacher/teacher.component';
+import { DoorComponent } from './classroom-entities/door/door.component';
+import { WindowComponent } from './classroom-entities/window/window.component';
+import { BlackboardComponent } from './classroom-entities/blackboard/blackboard.component';
+import { WhiteboardComponent } from './classroom-entities/whiteboard/whiteboard.component';
+import { EntityEntriesComponent } from './classroom-entities/entity-entries/entity-entries.component';
+import { SpacerComponent } from './classroom-entities/spacer/spacer.component';
 
 
 const firebaseConfig = {
@@ -57,7 +66,16 @@ const firebaseConfig = {
     HomeComponent,
     LoginComponent,
     HeaderComponent,
-    ClassroomComponent
+    ClassroomComponent,
+    ClassroomRendererComponent,
+    SeatComponent,
+    TeacherComponent,
+    DoorComponent,
+    WindowComponent,
+    BlackboardComponent,
+    WhiteboardComponent,
+    EntityEntriesComponent,
+    SpacerComponent
   ],
   imports: [
     BrowserModule,
