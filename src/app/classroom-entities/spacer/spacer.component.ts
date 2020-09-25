@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-spacer',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./spacer.component.sass']
 })
 export class SpacerComponent implements OnInit {
+  @Input('isVertical') isVertical: boolean = false;
+  @Input('isInTable') isInTable: boolean = false;
 
   constructor() { }
 

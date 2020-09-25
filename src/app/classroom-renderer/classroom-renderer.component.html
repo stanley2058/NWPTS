@@ -1,9 +1,11 @@
 <div class="display">
-    <div class="topBorder" *ngFor="let object of getSceneRenderList(classroom.Layout.scenes.top)"><app-entity-entries [entry]="object"></app-entity-entries></div>
-    <div class="rightBorder" *ngFor="let object of getSceneRenderList(classroom.Layout.scenes.right)"><app-entity-entries [entry]="object"></app-entity-entries></div>
-    <div class="bottomBorder" *ngFor="let object of getSceneRenderList(classroom.Layout.scenes.bottom)"><app-entity-entries [entry]="object"></app-entity-entries></div>
-    <div class="leftBorder" *ngFor="let object of getSceneRenderList(classroom.Layout.scenes.left)"><app-entity-entries [entry]="object"></app-entity-entries></div>
+    <div class="topBorder"   ><app-entity-entries *ngFor="let object of getSceneRenderList(classroom.Layout.scenes.top)"    [entry]="object"></app-entity-entries></div>
+    <div class="rightBorder" ><app-entity-entries *ngFor="let object of getSceneRenderList(classroom.Layout.scenes.right)"  [entry]="object" [isVertical]="true"></app-entity-entries></div>
+    <div class="bottomBorder"><app-entity-entries *ngFor="let object of getSceneRenderList(classroom.Layout.scenes.bottom)" [entry]="object"></app-entity-entries></div>
+    <div class="leftBorder"  ><app-entity-entries *ngFor="let object of getSceneRenderList(classroom.Layout.scenes.left)"   [entry]="object" [isVertical]="true"></app-entity-entries></div>
     <div class="main">
-        Test
+        <div class="main-row" *ngFor="let row of getSeatRenderList(classroom.Layout.seats)">
+            <app-entity-entries *ngFor="let cell of row" [entry]="cell.name" [id]="cell.id" [isInTable]="true" (cellSelected)="cellSelectionChanged($event)"></app-entity-entries>
+        </div>
     </div>
 </div>

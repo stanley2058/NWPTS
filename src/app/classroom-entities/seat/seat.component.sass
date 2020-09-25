@@ -1,0 +1,24 @@
+.seatBase
+    display: flex
+    justify-content: center
+    place-items: center
+.seat
+    @extend .seatBase
+    border-radius: 50%
+    width: 5em
+    height: 5em
+    background-color: purple
+.seatInner
+    @extend .seatBase
+    border-radius: 50%
+    width: 3em
+    height: 3em
+    background-color: green
+
+.seat:hover, .seatInner:hover
+    cursor: pointer
+
+.seat-selected
+    background-color: maroon
+.seatInner-selected
+    background-color: yellow

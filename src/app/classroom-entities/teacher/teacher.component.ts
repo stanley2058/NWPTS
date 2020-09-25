@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-teacher',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./teacher.component.sass']
 })
 export class TeacherComponent implements OnInit {
+  @Input('isVertical') isVertical: boolean = false;
 
   constructor() { }
 

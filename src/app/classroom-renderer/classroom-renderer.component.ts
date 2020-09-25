@@ -11,11 +11,31 @@ export class ClassroomRendererComponent implements OnInit {
   @Input('classroom') classroom: Classroom;
   classroomRowCount = 0;
   classroomColumnCount = 0;
+  selectedCellId: string = null;
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.classroom);
+  }
+
+  cellSelectionChanged(id: string) {
+    this.selectedCellId = id;
+    localStorage['currentCellId'] = id;
+  }
+
+  getSeatRenderList(seats: {row: number[]}[]) {
+    const list = [];
+    seats.forEach((row, i) => {
+      if (row.row) list.push(row.row.map((e, j) => {
+        return {name: e ? "seat" : "space", id: `${i}-${j}`};
+      }));
+      else {
+        const tmp = [];
+        for (let j = 0; j < this.classroom.Layout.cols; ++j) tmp.push({name: "space", id: `${i}-${j}`});
+        list.push(tmp);
+      }
+    });
+    return list;
   }
 
   getSceneRenderList(entities: {name: string, occupie?: number}[]) {
@@ -23,15 +43,15 @@ export class ClassroomRendererComponent implements OnInit {
     const assignListReverse: {name: string, from: number, to: number}[] = [];
     const list = [];
 
-    for (let i = 0, index = 0; i < this.classroom.Layout.cols;) {
+    for (let i = 0, index = 0; i < this.classroom.Layout.cols - 1;) {
       const len = entities[index].occupie ? entities[index].occupie : ClassroomDefine.Entities[entities[index].name].occupie - 1;
       if (len < 0) {
         assignList.push({
           name: entities[index].name,
           from: i,
-          to: this.classroom.Layout.cols
+          to: this.classroom.Layout.cols - 1
         });
-        i = this.classroom.Layout.cols;
+        i = this.classroom.Layout.cols - 1;
       } else {
         assignList.push({
           name: entities[index].name,
@@ -42,7 +62,7 @@ export class ClassroomRendererComponent implements OnInit {
         ++index;
       }
     }
-    for (let i = this.classroom.Layout.cols, index = entities.length - 1; i >= 0;) {
+    for (let i = this.classroom.Layout.cols - 1, index = entities.length - 1; i >= 0;) {
       const len = entities[index].occupie ? entities[index].occupie : ClassroomDefine.Entities[entities[index].name].occupie - 1;
       if (len < 0) {
         assignListReverse.push({

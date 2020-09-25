@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-blackboard',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./blackboard.component.sass']
 })
 export class BlackboardComponent implements OnInit {
+  @Input('isVertical') isVertical: boolean = false;
 
   constructor() { }
 

@@ -1,16 +1,37 @@
+.base
+    display: flex
+    place-content: center
+    
 .display
     display: grid
     grid-template-areas: "tlblank top trblank" "left main right" "blblank bottom brblank"
-    grid-template-rows: .1fr .6fr .1fr
-    grid-template-columns: .1fr .6fr .1fr
-    height: 1000px
+    grid-template-rows: .1fr .8fr .1fr
+    grid-template-columns: .1fr .8fr .1fr
     .topBorder
+        @extend .base
         grid-area: top
+        place-items: flex-end
     .rightBorder
+        @extend .base
         grid-area: right
+        flex-direction: column
     .bottomBorder
+        @extend .base
         grid-area: bottom
     .leftBorder
+        @extend .base
+        flex-direction: column
         grid-area: left
+        place-items: flex-end
     .main
         grid-area: main
+        display: flex
+        flex-direction: column
+        justify-content: space-around
+        border: 2px dashed steelblue
+        padding-top: 1em
+        padding-bottom: 1em
+        .main-row
+            display: flex
+            flex-direction: row
+            justify-content: space-around

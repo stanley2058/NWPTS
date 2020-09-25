@@ -1,1 +1,7 @@
-<p>seat works!</p>
+<div class="seatBase">
+    <div (click)="select()" [ngClass]="{'seat': true, 'seat-selected': selected}">
+        <div [ngClass]="{'seatInner': true, 'seatInner-selected': selected}">
+            <span *ngIf="selected">我</span>
+        </div>
+    </div>
+</div>
