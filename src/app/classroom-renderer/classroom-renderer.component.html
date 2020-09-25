@@ -1,5 +1,9 @@
-<div>
-    <div *ngFor="let object of getSceneRenderList(classroom.Layout.scenes.top)">
-        <app-entity-entries [entry]="object"></app-entity-entries>
+<div class="display">
+    <div class="topBorder" *ngFor="let object of getSceneRenderList(classroom.Layout.scenes.top)"><app-entity-entries [entry]="object"></app-entity-entries></div>
+    <div class="rightBorder" *ngFor="let object of getSceneRenderList(classroom.Layout.scenes.right)"><app-entity-entries [entry]="object"></app-entity-entries></div>
+    <div class="bottomBorder" *ngFor="let object of getSceneRenderList(classroom.Layout.scenes.bottom)"><app-entity-entries [entry]="object"></app-entity-entries></div>
+    <div class="leftBorder" *ngFor="let object of getSceneRenderList(classroom.Layout.scenes.left)"><app-entity-entries [entry]="object"></app-entity-entries></div>
+    <div class="main">
+        Test
     </div>
 </div>

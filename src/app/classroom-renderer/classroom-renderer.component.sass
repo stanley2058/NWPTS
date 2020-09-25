@@ -1,0 +1,16 @@
+.display
+    display: grid
+    grid-template-areas: "tlblank top trblank" "left main right" "blblank bottom brblank"
+    grid-template-rows: .1fr .6fr .1fr
+    grid-template-columns: .1fr .6fr .1fr
+    height: 1000px
+    .topBorder
+        grid-area: top
+    .rightBorder
+        grid-area: right
+    .bottomBorder
+        grid-area: bottom
+    .leftBorder
+        grid-area: left
+    .main
+        grid-area: main
