@@ -10,8 +10,18 @@
     font-family: 'Roboto', 'Noto Sans TC', sans-serif
 
 .classroom-entity-hori
-    width: 12em
+    width: 12vw
     height: 4em
 .classroom-entity-vert
     width: 4em
-    height: 12em
+    height: 8em
+@media screen and ( max-width: 500px )
+    .classroom-entity-vert
+        width: 2em
+@media screen and ( max-width: 350px )
+    .classroom-entity-vert
+        width: 1em
+
+@media screen and ( max-width: 600px )
+    .classroom-entity-vert
+        height: 6em

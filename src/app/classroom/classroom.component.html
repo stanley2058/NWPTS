@@ -27,7 +27,7 @@
     <nav>
         <mat-form-field appearance="fill" class="selection">
             <mat-label>教室選擇</mat-label>
-            <mat-select [(value)]="classroomSelected">
+            <mat-select [(value)]="classroomSelected" (selectionChange)="classroomSelectionChanged()">
               <mat-option *ngFor="let room of classrooms" [value]="room.Layout.id">{{room.Layout.name}}</mat-option>
             </mat-select>
         </mat-form-field>

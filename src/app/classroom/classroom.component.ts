@@ -17,10 +17,15 @@ export class ClassroomComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.classroomSelected = this.classrooms[0].Layout.id;
+    if (localStorage['classroom']) this.classroomSelected = localStorage['classroom'];
+    else this.classroomSelected = this.classrooms[0].Layout.id;
   }
 
   get classroom() {
     return this.classrooms.filter(c => c.Layout.id === this.classroomSelected)[0];
+  }
+
+  classroomSelectionChanged() {
+    localStorage['classroom'] = this.classroomSelected;
   }
 }
