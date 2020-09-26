@@ -1,10 +1,12 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Classroom } from '../classroom-define/Classroom';
 import { Classroom201 } from '../classroom-define/Classroom201';
 import { Classroom203 } from '../classroom-define/Classroom203';
 import { ClassroomRendererComponent } from '../classroom-renderer/classroom-renderer.component';
+import { ClassroomObject } from '../ClassroomObject';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { ClassroomService } from '../service/classroom-service.service';
 
@@ -13,40 +15,51 @@ import { ClassroomService } from '../service/classroom-service.service';
   templateUrl: './classroom.component.html',
   styleUrls: ['./classroom.component.sass']
 })
-export class ClassroomComponent implements OnInit, AfterViewInit {
+export class ClassroomComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(ClassroomRendererComponent) classroomRef: ClassroomRendererComponent;
   classrooms: Classroom[] = [new Classroom203(), new Classroom201()];
   classroomSelected: string;
-  sessionId: string;
-  isCalling: boolean;
   locked: boolean;
   idNumber: string = '';
-  waitingNumber = 0;
+
+  currentSession: ClassroomObject;
+  currentSessionSub: Subscription;
+  currentSessionId: string;
 
   constructor(
     private matDialog: MatDialog,
-    private route: ActivatedRoute,
     private classroomService: ClassroomService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.sessionId = this.route.snapshot.params['sid'];
     this.classroomService.hasLogin().then(res => {
-      if (res) {
-        if (this.sessionId) this.router.navigate([`classroom/ta/${this.sessionId}`]);
-        else this.router.navigate(['classroom/ta']);
-      }
+      if (res) this.router.navigate(['classroom/ta']);
     });
     
     if (localStorage['classroom']) this.classroomSelected = localStorage['classroom'];
     else this.classroomSelected = this.classrooms[0].Layout.id;
     if (localStorage['idNumber']) this.idNumber = localStorage['idNumber'];
+
+    this.classroomService.getActivateClassroomSession().then(res => {
+      this.currentSessionId = res.id;
+      this.currentSession = res.data();
+
+      this.currentSessionSub = this.classroomService.getSessionObservable(this.currentSessionId).subscribe(
+        update => {
+          this.currentSession = update;
+        }
+      );
+    });
   }
 
   ngAfterViewInit() {
     if (this.idNumber && this.cellId)
       setTimeout(() => this.lockInfo(), 1);
+  }
+
+  ngOnDestroy() {
+    if (this.currentSessionSub) this.currentSessionSub.unsubscribe();
   }
 
   get classroom() {
@@ -57,7 +70,7 @@ export class ClassroomComponent implements OnInit, AfterViewInit {
     localStorage['classroom'] = this.classroomSelected;
   }
 
-  get cellId() {
+  get cellId(): string {
     return this.classroomRef.selectedCellId || localStorage['currentCellId'];
   }
 
@@ -86,10 +99,29 @@ export class ClassroomComponent implements OnInit, AfterViewInit {
   }
 
   callTA() {
-    console.log(this.idNumber, this.cellId, this.classroom.Layout.id);
+    this.currentSession.waitingQueue.push({
+      timeInNumber: this.classroomService.timestamp.getTime(),
+      roomId: this.classroom.Layout.id,
+      cellId: this.cellId,
+      idNumber: this.idNumber
+    });
+    this.classroomService.updateClassroomObject(this.currentSessionId, this.currentSession);
   }
   
   cancel() {
-    
+    this.currentSession.waitingQueue = this.currentSession.waitingQueue.filter(e => 
+      e.roomId !== this.classroom.Layout.id ||
+      e.cellId !== this.cellId ||
+      e.idNumber !== this.idNumber
+    );
+    this.classroomService.updateClassroomObject(this.currentSessionId, this.currentSession);
+  }
+
+  get isCalling() {
+    return this.currentSession?.waitingQueue?.filter(e => 
+      e.roomId === this.classroom.Layout.id &&
+      e.cellId === this.cellId &&
+      e.idNumber === this.idNumber
+    ).length > 0;
   }
 }

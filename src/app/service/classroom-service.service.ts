@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth'
 import { AngularFirestore, DocumentData } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
+import { start } from 'repl';
 import { ClassroomObject } from '../ClassroomObject';
 
 @Injectable({
@@ -10,15 +11,12 @@ import { ClassroomObject } from '../ClassroomObject';
 export class ClassroomService {
   constructor(private auth: AngularFireAuth, private firestore: AngularFirestore) { }
 
-  callTA(roomId: string, cellId: string, id: string) {
-
-  }
-  cancelCallTA(roomId: string, cellId: string, id: string) {
-
+  updateClassroomObject(sid: string, toUpdate: ClassroomObject) {
+    return this.firestore.collection<ClassroomObject>('classroom-session').doc<ClassroomObject>(sid).update(toUpdate);
   }
 
-  getClassInfo(sid: string) {
-
+  getSessionObservable(sid: string) {
+    return this.firestore.collection<ClassroomObject>('classroom-session').doc<ClassroomObject>(sid).valueChanges();
   }
 
   createNewClassSession(data: ClassroomObject) {
@@ -32,6 +30,22 @@ export class ClassroomService {
       ).get().subscribe(
         result => {
           res(result.docs.filter(d => (d.data() as ClassroomObject).fromTime <= this.timestamp)[0]);
+        }
+      );
+    });
+  }
+
+  getHistorySessionRecord(startDate: Date, endDate: Date) {
+    return new Promise<ClassroomObject[]>(res => {
+      this.firestore.collection<ClassroomObject>('classroom-session',
+          ref => ref.where('toTime', '>=', startDate)
+      ).get().subscribe(
+        result => {
+          res(
+            result.docs
+              .filter(d => (d.data() as ClassroomObject).toTime <= endDate)
+              .map(e => e.data() as ClassroomObject)
+          );
         }
       );
     });
