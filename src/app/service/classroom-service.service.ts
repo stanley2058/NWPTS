@@ -28,7 +28,7 @@ export class ClassroomService {
         ref => ref.where('toTime', '>=', this.timestamp)
       ).get().subscribe(
         result => {
-          res(result.docs.filter(d => (d.data() as ClassroomObject).fromTime <= this.timestamp)[0]);
+          res(result.docs.filter(d => (d.data() as ClassroomObject).fromTime.toDate() <= this.timestamp)[0]);
         }
       );
     });

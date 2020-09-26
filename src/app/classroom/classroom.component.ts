@@ -26,6 +26,8 @@ export class ClassroomComponent implements OnInit, AfterViewInit, OnDestroy {
   currentSessionSub: Subscription;
   currentSessionId: string;
 
+  deadlineTimer: any;
+
   constructor(
     private matDialog: MatDialog,
     private classroomService: ClassroomService,
@@ -51,6 +53,8 @@ export class ClassroomComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       );
     });
+
+    this.deadlineTimer = setInterval(() => this.checkDeadline(), 5000);
   }
 
   ngAfterViewInit() {
@@ -115,6 +119,25 @@ export class ClassroomComponent implements OnInit, AfterViewInit, OnDestroy {
       e.idNumber !== this.idNumber
     );
     this.classroomService.updateClassroomObject(this.currentSessionId, this.currentSession);
+  }
+
+  checkDeadline() {
+    if (this.currentSession.toTime.toDate() >= this.classroomService.timestamp) return;
+    
+    clearInterval(this.deadlineTimer);
+
+    this.matDialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      height: '200px',
+      data: {
+        text: "已超過課程時間，將重新導向首頁。",
+        confirmOnly: true
+      }
+    }).afterClosed().subscribe(
+      obs => {
+        this.router.navigate(['']);
+      }
+    );
   }
 
   get isCalling() {

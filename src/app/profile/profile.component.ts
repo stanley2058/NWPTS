@@ -136,7 +136,7 @@ export class ProfileComponent implements OnInit {
     if (success) {
       this.dialog.open(ConfirmDialogComponent, {
         width: '350px',
-        height: '300px',
+        height: '200px',
         data: {
           text: message,
           confirmOnly: true,
@@ -146,7 +146,7 @@ export class ProfileComponent implements OnInit {
     } else {
       this.dialog.open(ConfirmDialogComponent, {
         width: '350px',
-        height: '300px',
+        height: '250px',
         data: {
           text: message,
           confirmOnly: true
