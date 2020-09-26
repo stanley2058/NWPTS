@@ -10,6 +10,7 @@ export class EntityEntriesComponent implements OnInit {
   @Input('isVertical') isVertical: boolean = false;
   @Input('id') id: string = null;
   @Input('isInTable') isInTable: boolean = false;
+  @Input('selectedId') selectedId: boolean;
   @Output('cellSelected') cellSelected = new EventEmitter<string>();
 
   constructor() { }

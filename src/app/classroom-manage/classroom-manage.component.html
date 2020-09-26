@@ -1,3 +1,32 @@
 <div>
     <app-header></app-header>
+
+    <nav>
+        <mat-form-field appearance="fill" class="selection">
+            <mat-label>教室選擇</mat-label>
+            <mat-select [(value)]="classroomSelected" (selectionChange)="classroomSelectionChanged()">
+              <mat-option *ngFor="let room of classrooms" [value]="room.Layout.id">{{room.Layout.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="action" [hidden]="currentSession?.questionNum <= 0">
+            <mat-form-field appearance="fill" class="selection">
+                <mat-label>本次題數</mat-label>
+                <mat-select [(value)]="currentScore">
+                <mat-option *ngFor="let sc of scoreSelection" [value]="sc">{{sc}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" (click)="submit()">送出</button>
+        </div>
+
+        <div class="waitingDisplay">
+            <h2>等待人數</h2>
+            <p>{{this.currentSession?.waitingQueue?.length || 0}}</p>
+        </div>
+    </nav>
+    
+    <main>
+        <app-classroom-renderer [classroom]="classroom" [locked]="'true'" [TAmode]="'true'"></app-classroom-renderer>
+    </main>
 </div>

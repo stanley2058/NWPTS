@@ -5,7 +5,7 @@
     <div class="leftBorder"  ><app-entity-entries *ngFor="let object of getSceneRenderList(classroom.Layout.scenes.left)"   [entry]="object" [isVertical]="true"></app-entity-entries></div>
     <div class="main">
         <div class="main-row" *ngFor="let row of getSeatRenderList(classroom.Layout.seats)">
-            <app-entity-entries *ngFor="let cell of row" [entry]="cell.name" [id]="cell.id" [isInTable]="true" (cellSelected)="cellSelectionChanged($event)"></app-entity-entries>
+            <app-entity-entries *ngFor="let cell of row" [entry]="cell.name" [id]="cell.id" [isInTable]="true" (cellSelected)="cellSelectionChanged($event)" [selectedId]="selectedCellId"></app-entity-entries>
         </div>
     </div>
 </div>

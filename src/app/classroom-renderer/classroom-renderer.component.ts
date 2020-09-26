@@ -10,6 +10,7 @@ import { ClassroomDefine } from '../classroom-define/ClassroomDefine';
 export class ClassroomRendererComponent implements OnInit {
   @Input('classroom') classroom: Classroom;
   @Input('locked') locked: boolean;
+  @Input('TAmode') TAmode: boolean;
   classroomRowCount = 0;
   classroomColumnCount = 0;
   selectedCellId: string = null;
@@ -17,7 +18,7 @@ export class ClassroomRendererComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if (!this.selectedCellId && localStorage['currentCellId'])
+    if (!this.TAmode && !this.selectedCellId && localStorage['currentCellId'])
       this.selectedCellId = localStorage['currentCellId'];
   }
 

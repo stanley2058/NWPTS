@@ -4,6 +4,6 @@
     <app-window     *ngSwitchCase="'window'"     [isVertical]="isVertical"></app-window>
     <app-blackboard *ngSwitchCase="'blackboard'" [isVertical]="isVertical"></app-blackboard>
     <app-whiteboard *ngSwitchCase="'whiteboard'" [isVertical]="isVertical"></app-whiteboard>
-    <app-seat       *ngSwitchCase="'seat'"       [isVertical]="isVertical" [id]="id" (cellSelected)="cellSelectionChanged($event)"></app-seat>
+    <app-seat       *ngSwitchCase="'seat'"       [isVertical]="isVertical" [id]="id" (cellSelected)="cellSelectionChanged($event)" [selectedId]='selectedId'></app-seat>
     <app-spacer     *ngSwitchDefault             [isVertical]="isVertical" [isInTable]="isInTable"></app-spacer>
 </div>

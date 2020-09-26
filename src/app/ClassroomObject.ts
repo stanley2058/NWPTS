@@ -1,6 +1,6 @@
 export interface ClassroomObject {
-    fromTime?: Date,
-    toTime?: Date,
+    fromTime?: any,
+    toTime?: any,
     questionNum?: number,
     studentRecords?: {
         record: number,

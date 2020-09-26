@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth'
 import { AngularFirestore, DocumentData } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
-import { start } from 'repl';
 import { ClassroomObject } from '../ClassroomObject';
 
 @Injectable({
@@ -38,7 +37,7 @@ export class ClassroomService {
   getHistorySessionRecord(startDate: Date, endDate: Date) {
     return new Promise<ClassroomObject[]>(res => {
       this.firestore.collection<ClassroomObject>('classroom-session',
-          ref => ref.where('toTime', '>=', startDate)
+          ref => ref.where('fromTime', '>=', startDate)
       ).get().subscribe(
         result => {
           res(

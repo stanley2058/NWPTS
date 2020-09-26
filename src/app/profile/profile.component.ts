@@ -11,6 +11,11 @@ import { ClassroomService } from '../service/classroom-service.service';
   styleUrls: ['./profile.component.sass']
 })
 export class ProfileComponent implements OnInit {
+  scoreQueried = false;
+  queryFlattenOption = false;
+  queryResultList: {id: string, score: number, date?: string}[];
+
+  loading = false;
 
   constructor(
     private classroomService: ClassroomService,
@@ -72,9 +77,59 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  queryCourseResult(e: Event) {
-    e.preventDefault();
-    // TODO: finish querying
+  queryAction(flatten: boolean = false) {
+    this.loading = true;
+    this.scoreQueried = false;
+    this.queryFlattenOption = flatten;
+    const promise = flatten ? this.getFlatScoreResult() : this.queryCourseResult();
+    promise.then(res => {
+      this.queryResultList = res;
+      this.scoreQueried = true;
+      this.loading = false;
+    });
+  }
+
+  queryCourseResult() {
+    const dateS = new Date((document.getElementById('dateS') as HTMLInputElement).value);
+    const dataF = new Date((document.getElementById('dateF') as HTMLInputElement).value);
+
+    const processList: {id: string, score: number, date: string}[] = [];
+    return new Promise<{id: string, score: number, date: string}[]>(resolve => {
+      this.classroomService.getHistorySessionRecord(dateS, dataF).then(res => {
+        res.forEach(s => {
+          const tmpMap = {};
+          s.studentRecords.forEach(r => {
+            if (tmpMap[r.idNumber]) tmpMap[r.idNumber] += r.record;
+            else tmpMap[r.idNumber] = r.record;
+          });
+          Object.keys(tmpMap).forEach(e => processList.push({
+            id: e,
+            score: tmpMap[e] > s.questionNum ? s.questionNum : tmpMap[e],
+            date: (s.fromTime.toDate() as Date).toLocaleDateString()
+          }));
+          resolve(processList);
+        });
+      });
+
+    });
+  }
+
+  getFlatScoreResult() {
+    const processList: {id: string, score: number}[] = [];
+    const tmpMap = {};
+    return new Promise<{id: string, score: number}[]>(resolve => {
+      this.queryCourseResult().then(result => {
+        result.forEach(entry => {
+          if (tmpMap[entry.id]) tmpMap[entry.id] += entry.score;
+          else tmpMap[entry.id] = entry.score;
+        });
+        Object.keys(tmpMap).forEach(k => processList.push({
+          id: k,
+          score: tmpMap[k]
+        }));
+        resolve(processList);
+      });
+    });
   }
 
   showDialog(message: string, success: boolean) {

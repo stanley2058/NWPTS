@@ -42,7 +42,7 @@
             <button *ngIf="!locked" mat-raised-button color="primary" (click)="lockInfo()">確認資訊</button>
             <button *ngIf="locked && !isCalling" mat-raised-button color="primary" (click)="callTA()">呼叫助教</button>
             <button *ngIf="locked && isCalling" mat-raised-button color="accent" (click)="cancel()">取消呼叫</button>
-            <button *ngIf="locked" mat-raised-button color="accent" (click)="unlockInfo()">修改資訊</button>
+            <button *ngIf="locked && !isCalling" mat-raised-button color="accent" (click)="unlockInfo()">修改資訊</button>
         </div>
 
         <div class="waitingDisplay">

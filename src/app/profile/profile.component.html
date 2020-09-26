@@ -37,19 +37,41 @@
                   <mat-panel-title>查看課程結果</mat-panel-title>
                   <mat-panel-description>查看 課堂作業 / Demo 結果</mat-panel-description>
                 </mat-expansion-panel-header>
-                <form class="course-panel-content" (submit)="queryCourseResult($event)">
+                <div class="course-panel-content">
                     <mat-form-field>
                         <mat-label>學期開始日期</mat-label>
-                        <input type="date" matInput required>
+                        <input type="date" matInput required id="dateS">
                     </mat-form-field>
 
                     <mat-form-field>
                         <mat-label>學期結束日期</mat-label>
-                        <input type="date" matInput required>
+                        <input type="date" matInput required id="dateF">
                     </mat-form-field>
 
-                    <button mat-raised-button color="primary" type="submit">查詢</button>
-                </form>
+                    <div class="action">
+                        <button mat-raised-button color="primary" (click)="queryAction()" name="query">查詢</button>
+                        <button mat-raised-button color="primary" (click)="queryAction(true)" name="queryAndCombine">查詢並合併資料</button>
+                    </div>
+                </div>
+                
+                <div *ngIf="scoreQueried">
+                    <table class="scoreTable">
+                        <thead>
+                            <tr>
+                                <th>學號</th>
+                                <th>題數</th>
+                                <th *ngIf="!queryFlattenOption">日期</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let entry of queryResultList">
+                                <td>{{entry.id}}</td>
+                                <td>{{entry.score}}</td>
+                                <td *ngIf="!queryFlattenOption">{{entry.date}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </mat-expansion-panel>
         </mat-accordion>
 
@@ -85,4 +107,7 @@
             </mat-expansion-panel>
         </mat-accordion>
     </main>
+    <div class="spinner" [hidden]="!loading">
+        <mat-spinner></mat-spinner>
+    </div>
 </div>

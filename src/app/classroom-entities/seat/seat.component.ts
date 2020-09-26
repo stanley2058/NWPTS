@@ -9,12 +9,13 @@ export class SeatComponent implements OnInit {
   @Input('isVertical') isVertical: boolean = false;
   @Input('id') id: string;
   @Output('cellSelected') cellSelected = new EventEmitter<string>();
+  @Input('selectedId') selectedId: string;
   selected = false;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.selected = localStorage['currentCellId'] && localStorage['currentCellId'] === this.id;
+    this.selected = this.selectedId === this.id;
   }
 
   select() {
