@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ClassroomService } from '../service/classroom-service.service';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +9,15 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(
+    private classroomService: ClassroomService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    //TODO: if is TA and logined redirect to classroom
+    this.classroomService.hasLogin().then(res => {
+      if (res) this.router.navigate(['profile']);
+    });
   }
 
   navigate(nav: string) {

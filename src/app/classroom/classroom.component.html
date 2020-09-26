@@ -18,8 +18,9 @@
 
         <h3>開始召喚助教</h3>
         <ol>
-            <li>選擇你的位子。</li>
-            <li>點擊<b>"呼叫助教"</b>按鈕。</li>
+            <li>填寫學號並選擇你的位子。</li>
+            <li>點擊<b>"確認資訊"</b>按鈕。</li>
+            <li>要找助教時點擊<b>"呼叫助教"</b>按鈕。</li>
             <li>等到等待人數歸零助教就會來找你了。</li>
             <li>如果突然發現不需要助教時請點擊<b>"取消呼叫"</b>按鈕</li>
         </ol>
@@ -27,14 +28,21 @@
     <nav>
         <mat-form-field appearance="fill" class="selection">
             <mat-label>教室選擇</mat-label>
-            <mat-select [(value)]="classroomSelected" (selectionChange)="classroomSelectionChanged()">
+            <mat-select [disabled]="locked" [(value)]="classroomSelected" (selectionChange)="classroomSelectionChanged()">
               <mat-option *ngFor="let room of classrooms" [value]="room.Layout.id">{{room.Layout.name}}</mat-option>
             </mat-select>
         </mat-form-field>
 
+        <mat-form-field appearance="fill" class="idInput">
+            <mat-label>學號</mat-label>
+            <input matInput [disabled]="locked" [value]="idNumber" (input)="idNumber = $event.target.value">
+        </mat-form-field>        
+
         <div class="action">
-            <button *ngIf="!isCalling" mat-raised-button color="primary">呼叫助教</button>
-            <button *ngIf="isCalling" mat-raised-button color="accent">取消呼叫</button>
+            <button *ngIf="!locked" mat-raised-button color="primary" (click)="lockInfo()">確認資訊</button>
+            <button *ngIf="locked && !isCalling" mat-raised-button color="primary" (click)="callTA()">呼叫助教</button>
+            <button *ngIf="locked && isCalling" mat-raised-button color="accent" (click)="cancel()">取消呼叫</button>
+            <button *ngIf="locked" mat-raised-button color="accent" (click)="unlockInfo()">修改資訊</button>
         </div>
 
         <div class="waitingDisplay">
@@ -43,6 +51,6 @@
         </div>
     </nav>
     <main>
-        <app-classroom-renderer [classroom]="classroom"></app-classroom-renderer>
+        <app-classroom-renderer [classroom]="classroom" [locked]="locked"></app-classroom-renderer>
     </main>
 </div>

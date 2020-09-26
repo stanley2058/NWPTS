@@ -5,8 +5,11 @@ nav
     left: 11.5vw
     display: grid
     grid-template-columns: 150px 1fr
-    grid-template-areas: "sel num" "act num"
+    grid-template-areas: "id num" "sel num" "act num"
 
+    .idInput
+        grid-area: id
+        max-width: 150px
     .selection
         grid-area: sel
         max-width: 150px

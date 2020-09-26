@@ -1,0 +1,76 @@
+<div>
+    <app-header></app-header>
+
+    <main>
+        <h1>助教個人資料和系統操作</h1>
+
+        <h3>課程相關</h3>
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>新建課程</mat-panel-title>
+                  <mat-panel-description>建立新的課程</mat-panel-description>
+                </mat-expansion-panel-header>
+                <form class="course-panel-content" (submit)="createNewSession($event)">
+                    <mat-form-field>
+                        <mat-label>日期</mat-label>
+                        <input type="date" matInput required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>課程開始時間 (9~18)</mat-label>
+                        <input type="time" matInput required min="09:00" max="18:00">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>課程結束時間 (9~18)</mat-label>
+                        <input type="time" matInput required min="09:00" max="18:00">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>(選填) 課堂作業 / Demo 題目數量</mat-label>
+                        <input type="number" matInput min="0">
+                    </mat-form-field>
+                    <button mat-raised-button color="warn" type="submit">建立新的課程</button>
+                </form>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>查看課程結果</mat-panel-title>
+                  <mat-panel-description>查看 課堂作業 / Demo 結果</mat-panel-description>
+                </mat-expansion-panel-header>
+                
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <h3>帳號相關</h3>
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>新增助教</mat-panel-title>
+                  <mat-panel-description>新增助教帳號</mat-panel-description>
+                </mat-expansion-panel-header>
+                <form class="panel-content" (submit)="createTaAccount($event)">
+                    <mat-form-field>
+                        <mat-label>新助教 Email</mat-label>
+                        <input type="email" matInput required>
+                    </mat-form-field>
+                    <i>(預設密碼：soselab401)</i>
+                    <button mat-raised-button color="warn" type="submit">新增助教</button>
+                </form>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>變更密碼</mat-panel-title>
+                  <mat-panel-description>變更登入系統的密碼</mat-panel-description>
+                </mat-expansion-panel-header>
+                <form class="panel-content" (submit)="updatePassword($event)">
+                    <mat-form-field>
+                        <mat-label>新密碼</mat-label>
+                        <input type="password" matInput required>
+                    </mat-form-field>
+                    <button mat-raised-button color="warn" type="submit">變更密碼</button>
+                </form>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </main>
+</div>

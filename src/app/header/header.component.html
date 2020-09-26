@@ -9,6 +9,7 @@
         <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="navigate('classroom')">教室頁面</button>
             <button mat-menu-item *ngIf="!hasLogin" (click)="navigate('login')">助教登入</button>
+            <button mat-menu-item *ngIf="hasLogin" (click)="navigate('profile')">個人資料</button>
             <button mat-menu-item *ngIf="hasLogin" (click)="logout()">登出</button>
         </mat-menu>
     </nav>

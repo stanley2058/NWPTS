@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ClassroomService } from '../service/classroom-service.service';
 
 @Component({
   selector: 'app-header',
@@ -9,9 +10,10 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   hasLogin: boolean
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private classroomService: ClassroomService) { }
 
   ngOnInit(): void {
+    this.classroomService.hasLogin().then(res => this.hasLogin = res);
   }
 
   navigate(nav: string) {
@@ -19,6 +21,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-
+    this.classroomService.logout();
+    this.router.navigate(['']);
   }
 }

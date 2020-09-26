@@ -2,31 +2,30 @@
     display: flex
     justify-content: center
     place-items: center
-.seat
-    @extend .seatBase
-    border-radius: 50%
-    width: 5em
-    height: 5em
-    background-color: purple
-.seatInner
-    @extend .seatBase
-    border-radius: 50%
-    width: 3em
-    height: 3em
-    background-color: green
 
-.seat:hover, .seatInner:hover
-    cursor: pointer
+    mat-icon
+        font-size: 5em
 
-.seat-selected
-    background-color: maroon
-.seatInner-selected
-    background-color: yellow
+    .seat
+        display: flex
+        justify-content: flex-start
+        place-items: flex-start
+        border-radius: 50%
+        width: 5em
+        height: 5em
+        text-align: center
+        color: wheat
+
+    .seat:hover, mat-icon:hover
+        cursor: pointer
+
+    .selected
+        color: firebrick
+
 
 @media screen and ( max-width: 600px )
     .seat
         width: 3em
         height: 3em
-    .seatInner
-        width: 2em
-        height: 2em
+    mat-icon
+        font-size: 3em

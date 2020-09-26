@@ -1,7 +1,6 @@
 <div class="seatBase">
-    <div (click)="select()" [ngClass]="{'seat': true, 'seat-selected': selected}">
-        <div [ngClass]="{'seatInner': true, 'seatInner-selected': selected}">
-            <span *ngIf="selected">我</span>
-        </div>
+    <div class="seat" (click)="select()">
+        <mat-icon *ngIf="!selected">trip_origin</mat-icon>
+        <mat-icon title="我" *ngIf="selected" class="selected">person_pin_circle</mat-icon>
     </div>
 </div>

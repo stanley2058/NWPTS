@@ -1,0 +1,9 @@
+<div class="infoPanel">
+    <span *ngIf="!data.infoDialog" class="material-icons warn-icon">warning</span>
+    <span *ngIf="data.infoDialog" class="material-icons info-icon">info</span>
+    <h3 mat-dialog-title>{{data.text}}</h3>
+    <div mat-dialog-actions class="btnPanel">
+      <button mat-raised-button color="accent" [mat-dialog-close]="false" cdkFocusInitial *ngIf="!data.confirmOnly">返回</button>
+      <button mat-raised-button color="{{data.infoDialog ? 'primary' : 'warn'}}" [mat-dialog-close]="true">確定</button>
+    </div>
+</div>

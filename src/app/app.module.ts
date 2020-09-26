@@ -47,6 +47,9 @@ import { BlackboardComponent } from './classroom-entities/blackboard/blackboard.
 import { WhiteboardComponent } from './classroom-entities/whiteboard/whiteboard.component';
 import { EntityEntriesComponent } from './classroom-entities/entity-entries/entity-entries.component';
 import { SpacerComponent } from './classroom-entities/spacer/spacer.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ClassroomManageComponent } from './classroom-manage/classroom-manage.component';
 
 
 const firebaseConfig = {
@@ -75,7 +78,10 @@ const firebaseConfig = {
     BlackboardComponent,
     WhiteboardComponent,
     EntityEntriesComponent,
-    SpacerComponent
+    SpacerComponent,
+    ConfirmDialogComponent,
+    ProfileComponent,
+    ClassroomManageComponent
   ],
   imports: [
     BrowserModule,
