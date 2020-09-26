@@ -29,7 +29,7 @@
                         <mat-label>(選填) 課堂作業 / Demo 題目數量</mat-label>
                         <input type="number" matInput min="0">
                     </mat-form-field>
-                    <button mat-raised-button color="warn" type="submit">建立新的課程</button>
+                    <button mat-raised-button color="primary" type="submit">建立新的課程</button>
                 </form>
             </mat-expansion-panel>
             <mat-expansion-panel>
@@ -37,7 +37,19 @@
                   <mat-panel-title>查看課程結果</mat-panel-title>
                   <mat-panel-description>查看 課堂作業 / Demo 結果</mat-panel-description>
                 </mat-expansion-panel-header>
-                
+                <form class="course-panel-content" (submit)="queryCourseResult($event)">
+                    <mat-form-field>
+                        <mat-label>學期開始日期</mat-label>
+                        <input type="date" matInput required>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>學期結束日期</mat-label>
+                        <input type="date" matInput required>
+                    </mat-form-field>
+
+                    <button mat-raised-button color="primary" type="submit">查詢</button>
+                </form>
             </mat-expansion-panel>
         </mat-accordion>
 

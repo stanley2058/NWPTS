@@ -4,6 +4,7 @@ import { Classroom } from '../classroom-define/Classroom';
 import { Classroom201 } from '../classroom-define/Classroom201';
 import { Classroom203 } from '../classroom-define/Classroom203';
 import { ClassroomRendererComponent } from '../classroom-renderer/classroom-renderer.component';
+import { ClassroomObject } from '../ClassroomObject';
 import { ClassroomService } from '../service/classroom-service.service';
 
 @Component({

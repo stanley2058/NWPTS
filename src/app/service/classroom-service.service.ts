@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth'
-import { AngularFirestore } from '@angular/fire/firestore';
-import { v4 as uuidv4 } from 'uuid';
+import { AngularFirestore, DocumentData } from '@angular/fire/firestore';
+import * as firebase from 'firebase/app';
+import { ClassroomObject } from '../ClassroomObject';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClassroomService {
-
   constructor(private auth: AngularFireAuth, private firestore: AngularFirestore) { }
 
   callTA(roomId: string, cellId: string, id: string) {
@@ -21,9 +21,20 @@ export class ClassroomService {
 
   }
 
-  createNewClassSession() {
-    const sessionId = uuidv4();
+  createNewClassSession(data: ClassroomObject) {
+    return this.firestore.collection<ClassroomObject>('classroom-session').add(data);
+  }
 
+  getActivateClassroomSession() {
+    return new Promise<DocumentData>(res => {
+      this.firestore.collection<ClassroomObject>('classroom-session',
+        ref => ref.where('toTime', '>=', this.timestamp)
+      ).get().subscribe(
+        result => {
+          res(result.docs.filter(d => (d.data() as ClassroomObject).fromTime <= this.timestamp)[0]);
+        }
+      );
+    });
   }
 
   login(email: string, password: string) {
@@ -58,5 +69,9 @@ export class ClassroomService {
         res(!!user);
       }
     ));
+  }
+
+  get timestamp() {
+    return firebase.firestore.Timestamp.now().toDate();
   }
 }
