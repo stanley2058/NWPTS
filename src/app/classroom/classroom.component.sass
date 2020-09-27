@@ -5,7 +5,7 @@ nav
     left: 11.5vw
     display: grid
     grid-template-columns: 150px 1fr
-    grid-template-areas: "id num" "sel num" "act num"
+    grid-template-areas: "id num" "sel num" "act info"
 
     .idInput
         grid-area: id
@@ -28,6 +28,9 @@ nav
             font-weight: bold
         p
             font-size: 3rem
+    .info
+        text-align: center
+        grid-area: info
 
 section
     position: relative

@@ -32,6 +32,37 @@
                     <button mat-raised-button color="primary" type="submit">建立新的課程</button>
                 </form>
             </mat-expansion-panel>
+
+            <mat-expansion-panel (opened)="getFutureSessions()">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>預定課程</mat-panel-title>
+                  <mat-panel-description>顯示與操作預定的課程</mat-panel-description>
+                </mat-expansion-panel-header>
+                <table class="bookedTable">
+                    <thead>
+                        <tr>
+                            <th>時間</th>
+                            <th>題數</th>
+                            <th>刪除</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let c of bookedSessions">
+                            <td>
+                                <p>開始：{{convertToTime(c.data.fromTime)}}</p>
+                                <p>結束：{{convertToTime(c.data.toTime)}}</p>
+                            </td>
+                            <td>{{c.data.questionNum}}</td>
+                            <td class="actionTd">
+                                <button mat-button (click)="deleteSession(c.id)">
+                                    <mat-icon>clear</mat-icon>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </mat-expansion-panel>
+
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                   <mat-panel-title>查看課程結果</mat-panel-title>

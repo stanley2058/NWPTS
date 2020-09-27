@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit {
   scoreQueried = false;
   queryFlattenOption = false;
   queryResultList: {id: string, score: number, date?: string}[];
+  bookedSessions: {id: string, data: ClassroomObject}[] = [];
 
   loading = false;
 
@@ -24,9 +25,11 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loading = true;
     this.classroomService.hasLogin().then(res => {
       if (!res) this.router.navigate(['']);
     });
+    this.getFutureSessions();
   }
 
   updatePassword(e: Event) {
@@ -130,6 +133,40 @@ export class ProfileComponent implements OnInit {
         resolve(processList);
       });
     });
+  }
+
+  getFutureSessions() {
+    this.loading = true;
+    this.bookedSessions = [];
+    this.classroomService.getBookedSessions().then(res => {
+      res.forEach(r => {
+        this.bookedSessions.push({id: r.id, data: r.data()});
+      })
+    });
+    this.loading = false;
+  }
+
+  convertToTime(timestamp: any) {
+    return (timestamp.toDate() as Date).toLocaleString();
+  }
+
+  deleteSession(id: string) {
+    this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      height: '200px',
+      data: {
+        text: "確定要刪除？此動作無法復原！"
+      }
+    }).afterClosed().subscribe(
+      option => {
+        if (option) {
+          this.loading = true;
+          this.classroomService.deleteSession(id).then(res => {
+            this.getFutureSessions();
+          });
+        }
+      }
+    );
   }
 
   showDialog(message: string, success: boolean) {

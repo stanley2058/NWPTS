@@ -47,7 +47,13 @@
 
         <div class="waitingDisplay">
             <h2>等待人數</h2>
-            <p>{{this.currentSession?.waitingQueue?.length || 0}}</p>
+            <p>{{currentSession?.waitingQueue?.length || 0}}</p>
+        </div>
+
+        <div class="info">
+            <p><b>課程開放時間：</b></p>
+            <p><b>從：</b>{{fromTime}}</p>
+            <p><b>到：</b>{{toTime}}</p>
         </div>
     </nav>
     <main>

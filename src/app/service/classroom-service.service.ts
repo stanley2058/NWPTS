@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth'
-import { AngularFirestore, DocumentData } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentData, QueryDocumentSnapshot } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { ClassroomObject } from '../ClassroomObject';
 
@@ -34,6 +34,19 @@ export class ClassroomService {
     });
   }
 
+  getBookedSessions() {
+    return new Promise<QueryDocumentSnapshot<DocumentData>[]>(res => {
+      this.firestore.collection<ClassroomObject>('classroom-session',
+        ref => ref.where('fromTime', '>', this.timestamp)
+      ).get().subscribe(
+        result => {
+          console.log(result)
+          res(result.docs);
+        }
+      );
+    });
+  }
+
   getHistorySessionRecord(startDate: Date, endDate: Date) {
     return new Promise<ClassroomObject[]>(res => {
       this.firestore.collection<ClassroomObject>('classroom-session',
@@ -48,6 +61,10 @@ export class ClassroomService {
         }
       );
     });
+  }
+
+  deleteSession(id: string) {
+    return this.firestore.collection<ClassroomObject>('classroom-session').doc(id).delete();
   }
 
   login(email: string, password: string) {

@@ -65,6 +65,7 @@ export class ClassroomComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    if (this.deadlineTimer) clearInterval(this.deadlineTimer);
     if (this.currentSessionSub) this.currentSessionSub.unsubscribe();
   }
 
@@ -126,7 +127,8 @@ export class ClassroomComponent implements OnInit, AfterViewInit, OnDestroy {
   checkDeadline() {
     if (this.currentSession && this.currentSession.toTime.toDate() >= this.classroomService.timestamp) return;
     
-    if (this.deadlineTimer) clearInterval(this.deadlineTimer);
+    if (!this.deadlineTimer) return;
+    clearInterval(this.deadlineTimer);
 
     this.matDialog.open(ConfirmDialogComponent, {
       width: '350px',
@@ -148,5 +150,14 @@ export class ClassroomComponent implements OnInit, AfterViewInit, OnDestroy {
       e.cellId === this.cellId &&
       e.idNumber === this.idNumber
     ).length > 0;
+  }
+
+  get fromTime() {
+    if (this.currentSession) return (this.currentSession.fromTime.toDate() as Date).toLocaleString();
+    return '';
+  }
+  get toTime() {
+    if (this.currentSession) return (this.currentSession.toTime.toDate() as Date).toLocaleString();
+    return '';
   }
 }
