@@ -123,7 +123,7 @@ export class ClassroomComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   checkDeadline() {
-    if (this.currentSession.toTime.toDate() >= this.classroomService.timestamp) return;
+    if (this.currentSession && this.currentSession.toTime.toDate() >= this.classroomService.timestamp) return;
     
     if (this.deadlineTimer) clearInterval(this.deadlineTimer);
 
