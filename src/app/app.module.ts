@@ -12,20 +12,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule, MAT_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER } from '@angular/material/tooltip';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatTabsModule } from '@angular/material/tabs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatTableModule } from '@angular/material/table';
-import { MatSortModule } from '@angular/material/sort';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 // <-- Firebase Import -->
 import { AngularFireModule } from '@angular/fire';
@@ -50,6 +43,9 @@ import { SpacerComponent } from './classroom-entities/spacer/spacer.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ClassroomManageComponent } from './classroom-manage/classroom-manage.component';
+import { AboutComponent } from './about/about.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 const firebaseConfig = {
@@ -81,7 +77,8 @@ const firebaseConfig = {
     SpacerComponent,
     ConfirmDialogComponent,
     ProfileComponent,
-    ClassroomManageComponent
+    ClassroomManageComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -95,23 +92,16 @@ const firebaseConfig = {
     MatFormFieldModule,
     MatInputModule,
     MatTooltipModule,
-    MatSnackBarModule,
     MatDialogModule,
     MatMenuModule,
-    MatCheckboxModule,
-    MatTabsModule,
     MatNativeDateModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
     MatProgressSpinnerModule,
     MatCardModule,
     MatExpansionModule,
-    MatAutocompleteModule,
     MatDatepickerModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule, // firestore
-    AngularFireAuthModule, // auth
+    AngularFireAuthModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }), // auth
   ],
   providers: [
     { provide: LOCALE_ID, useValue: "zh-Hant" },
