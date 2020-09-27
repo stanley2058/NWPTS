@@ -44,18 +44,19 @@ export class ClassroomComponent implements OnInit, AfterViewInit, OnDestroy {
     if (localStorage['idNumber']) this.idNumber = localStorage['idNumber'];
 
     this.classroomService.getActivateClassroomSession().then(res => {
-      this.currentSessionId = res.id;
-      this.currentSession = res.data();
-
-      this.currentSessionSub = this.classroomService.getSessionObservable(this.currentSessionId).subscribe(
-        update => {
-          this.currentSession = update;
-        }
-      );
+      if (res) {
+        this.currentSessionId = res.id;
+        this.currentSession = res.data();
+  
+        this.currentSessionSub = this.classroomService.getSessionObservable(this.currentSessionId).subscribe(
+          update => {
+            this.currentSession = update;
+          }
+        );
+      }
     });
 
-    this.checkDeadline();
-    this.deadlineTimer = setInterval(() => this.checkDeadline(), 5000);
+    this.deadlineTimer = setInterval(() => this.checkDeadline(), 1000);
   }
 
   ngAfterViewInit() {
