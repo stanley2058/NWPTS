@@ -2,6 +2,8 @@
     display: flex
     justify-content: center
     place-items: center
+    width: 5em
+    height: 5em
 
     mat-icon
         font-size: 5em
@@ -11,10 +13,10 @@
         justify-content: flex-start
         place-items: flex-start
         border-radius: 50%
-        width: 5em
-        height: 5em
         text-align: center
         color: wheat
+        width: 5em
+        height: 5em
 
     .seat:hover, mat-icon:hover
         cursor: pointer
@@ -23,9 +25,13 @@
         color: firebrick
 
 
-@media screen and ( max-width: 600px )
-    .seat
+@media screen and ( max-width: 650px )
+    .seatBase
         width: 3em
         height: 3em
-    mat-icon
-        font-size: 3em
+
+        mat-icon
+            font-size: 3em
+        .seat
+            width: 3em
+            height: 3em

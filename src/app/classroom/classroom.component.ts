@@ -26,7 +26,7 @@ export class ClassroomComponent implements OnInit, AfterViewInit, OnDestroy {
   currentSessionSub: Subscription;
   currentSessionId: string;
 
-  deadlineTimer: any;
+  deadlineTimer: any = null;
 
   constructor(
     private matDialog: MatDialog,
@@ -54,6 +54,7 @@ export class ClassroomComponent implements OnInit, AfterViewInit, OnDestroy {
       );
     });
 
+    this.checkDeadline();
     this.deadlineTimer = setInterval(() => this.checkDeadline(), 5000);
   }
 
@@ -124,7 +125,7 @@ export class ClassroomComponent implements OnInit, AfterViewInit, OnDestroy {
   checkDeadline() {
     if (this.currentSession.toTime.toDate() >= this.classroomService.timestamp) return;
     
-    clearInterval(this.deadlineTimer);
+    if (this.deadlineTimer) clearInterval(this.deadlineTimer);
 
     this.matDialog.open(ConfirmDialogComponent, {
       width: '350px',
