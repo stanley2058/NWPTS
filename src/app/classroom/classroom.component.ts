@@ -44,6 +44,7 @@ export class ClassroomComponent implements OnInit, AfterViewInit, OnDestroy {
     if (localStorage['idNumber']) this.idNumber = localStorage['idNumber'];
 
     this.classroomService.getActivateClassroomSession().then(res => {
+      this.deadlineTimer = setInterval(() => this.checkDeadline(), 1000);
       if (res) {
         this.currentSessionId = res.id;
         this.currentSession = res.data();
@@ -55,8 +56,6 @@ export class ClassroomComponent implements OnInit, AfterViewInit, OnDestroy {
         );
       }
     });
-
-    this.deadlineTimer = setInterval(() => this.checkDeadline(), 1000);
   }
 
   ngAfterViewInit() {
@@ -127,7 +126,7 @@ export class ClassroomComponent implements OnInit, AfterViewInit, OnDestroy {
   checkDeadline() {
     if (this.currentSession && this.currentSession.toTime.toDate() >= this.classroomService.timestamp) return;
     
-    if (!this.deadlineTimer) return;
+    if (this.deadlineTimer) return;
     clearInterval(this.deadlineTimer);
 
     this.matDialog.open(ConfirmDialogComponent, {

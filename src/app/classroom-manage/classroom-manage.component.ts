@@ -76,7 +76,7 @@ export class ClassroomManageComponent implements OnInit, OnDestroy {
       if (this.classroomSelected === sorted[0].roomId)
         this.classroomRef.selectedCellId = sorted[0].cellId;
       else this.classroomRef.selectedCellId = null;
-    }
+    } else if (this.classroomRef) this.classroomRef.selectedCellId = null;
   }
 
   submit() {
