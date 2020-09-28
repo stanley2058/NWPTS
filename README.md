@@ -4,13 +4,26 @@
 ![](NWPTS.png)
 
 - [NTOU Web Programming TA System](#ntou-web-programming-ta-system)
-  * [Using](#using)
+  * [Introduction](#introduction)
+  * [Technology](#technology)
   * [Build And Deploy](#build-and-deploy)
   * [Run Angular Dev Server](#run-angular-dev-server)
   * [Customize Classroom Layout](#customize-classroom-layout)
 
+## Introduction
+**NWPTS** stands for **NTOU Web Programming TA System**, is a project develop to help poor TAs to organize demo requests from students.
+\
+The icon of this project is hand crafted by myself, you can use it where ever you want.
+\
+Keep reading for building, deploying and modifying the system. For how to use the system, see:
+- [System Introduction](INTRODUCTION.md)
 
-## Using
+
+
+---
+
+
+## Technology
 - Angular
 - Angular Material
 - Angularfire
