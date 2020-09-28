@@ -7,9 +7,8 @@
   * [Using](#using)
   * [Build And Deploy](#build-and-deploy)
   * [Run Angular Dev Server](#run-angular-dev-server)
-  * [Define A Classroom](#define-a-classroom)
+  * [Customize Classroom Layout](#customize-classroom-layout)
 
----
 
 ## Using
 - Angular
@@ -17,21 +16,18 @@
 - Angularfire
 - Firebase
 
----
 
 ## Build And Deploy
 1. Replace the Firebase project tokens in `app.modules.ts`
 2. The **Firestore** collection name should be **classroom-session**, or you can change all the collection names in `classroom-service.service.ts`
 3. `ng deploy`
 
----
 
 ## Run Angular Dev Server
 1. `npm i -g @angular/cli`
 2. `npm i`
 3. `ng serve --open`
 
----
 
 ## Customize Classroom Layout
 1. Implement the Classroom interface.
