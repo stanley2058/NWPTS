@@ -48,10 +48,12 @@ export class ClassroomComponent implements OnInit, AfterViewInit, OnDestroy {
       if (res) {
         this.currentSessionId = res.id;
         this.currentSession = res.data();
+        this.currentSession.waitingQueue.sort((a, b) => a.timeInNumber - b.timeInNumber);
   
         this.currentSessionSub = this.classroomService.getSessionObservable(this.currentSessionId).subscribe(
           update => {
             this.currentSession = update;
+            this.currentSession.waitingQueue.sort((a, b) => a.timeInNumber - b.timeInNumber);
           }
         );
       }
@@ -157,5 +159,17 @@ export class ClassroomComponent implements OnInit, AfterViewInit, OnDestroy {
   get toTime() {
     if (this.currentSession) return (this.currentSession.toTime.toDate() as Date).toLocaleString();
     return '';
+  }
+
+  get numberInQueue() {
+    if (!this.currentSession) return 0;
+    for (let i = 0; i < this.currentSession.waitingQueue.length; ++i) {
+      const c = this.currentSession.waitingQueue[i];
+      if (c.idNumber === this.idNumber &&
+        c.cellId === this.cellId &&
+        c.roomId === this.classroomSelected
+      ) return i + 1;
+    }
+    return 0;
   }
 }

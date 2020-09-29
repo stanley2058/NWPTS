@@ -46,8 +46,14 @@
         </div>
 
         <div class="waitingDisplay">
-            <h2>等待人數</h2>
-            <p>{{currentSession?.waitingQueue?.length || 0}}</p>
+            <div *ngIf="!isCalling">
+                <h2>等待人數</h2>
+                <p>{{currentSession?.waitingQueue?.length || 0}}</p>
+            </div>
+            <div *ngIf="isCalling">
+                <h2>目前順位</h2>
+                <p>{{numberInQueue || 0}}</p>
+            </div>
         </div>
 
         <div class="info">
