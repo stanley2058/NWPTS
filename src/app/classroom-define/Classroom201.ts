@@ -7,7 +7,7 @@ export class Classroom201 implements Classroom {
         rows: 6,
         cols: 6,
         scenes: {
-            top:    [{name: 'window'}],
+            top:    [{name: 'door'}, {name: 'window'}, {name: 'door'}],
             left:   [{name: 'whiteboard'}],
             right:  [{name: 'door'}, {name: 'window'}, {name: 'door'}],
             bottom: [{name: 'window'}]
