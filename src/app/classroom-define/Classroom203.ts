@@ -21,9 +21,6 @@ export class Classroom203 implements Classroom {
             {row: null},
             {row: [1,1,1,1,1,1]},
             {row: [1,1,1,1,1,1]},
-            {row: null},
-            {row: [1,1,1,1,1,1]},
-            {row: [1,1,1,1,1,1]},
         ]
     };
 }

@@ -71,7 +71,7 @@ export class ClassroomManageComponent implements OnInit, OnDestroy {
 
   updateCellId() {
     if (this.classroomRef && this.currentSession && this.currentSession.waitingQueue && this.currentSession.waitingQueue.length > 0) {
-      const sorted = [...this.currentSession.waitingQueue].sort((a,b) => a.timeInNumber - b.timeInNumber);
+      const sorted = [...this.currentSession.waitingQueue].filter(c => c.roomId === this.classroomSelected).sort((a,b) => a.timeInNumber - b.timeInNumber);
       this.currentStudentIdNumber = sorted[0].idNumber;
       if (this.classroomSelected === sorted[0].roomId)
         this.classroomRef.selectedCellId = sorted[0].cellId;
@@ -104,5 +104,11 @@ export class ClassroomManageComponent implements OnInit, OnDestroy {
 
   get classroom() {
     return this.classrooms.filter(c => c.Layout.id === this.classroomSelected)[0];
+  }
+
+  get numberInQueue() {
+    if (!this.currentSession) return 0;
+    const queue = this.currentSession.waitingQueue.filter(c => c.roomId === this.classroomSelected);
+    return queue.length;
   }
 }

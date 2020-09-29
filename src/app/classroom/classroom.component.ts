@@ -163,8 +163,9 @@ export class ClassroomComponent implements OnInit, AfterViewInit, OnDestroy {
 
   get numberInQueue() {
     if (!this.currentSession) return 0;
-    for (let i = 0; i < this.currentSession.waitingQueue.length; ++i) {
-      const c = this.currentSession.waitingQueue[i];
+    const queue = this.currentSession.waitingQueue.filter(c => c.roomId === this.classroomSelected);
+    for (let i = 0; i < queue.length; ++i) {
+      const c = queue[i];
       if (c.idNumber === this.idNumber &&
         c.cellId === this.cellId &&
         c.roomId === this.classroomSelected
