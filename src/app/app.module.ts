@@ -46,6 +46,7 @@ import { ClassroomManageComponent } from './classroom-manage/classroom-manage.co
 import { AboutComponent } from './about/about.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ManualInsertDialogComponent } from './manual-insert-dialog/manual-insert-dialog.component';
 
 
 const firebaseConfig = {
@@ -78,7 +79,8 @@ const firebaseConfig = {
     ConfirmDialogComponent,
     ProfileComponent,
     ClassroomManageComponent,
-    AboutComponent
+    AboutComponent,
+    ManualInsertDialogComponent
   ],
   imports: [
     BrowserModule,

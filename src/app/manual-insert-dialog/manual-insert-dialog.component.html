@@ -1,0 +1,26 @@
+<div class="infoPanel">
+    <h1 mat-dialog-title>手動新增Demo紀錄</h1>
+
+    <div mat-dialog-content>
+        <mat-form-field appearance="fill">
+            <mat-label>學號</mat-label>
+            <input type="text" matInput id="idNumber">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="selection">
+            <mat-label>本次題數</mat-label>
+            <mat-select [(value)]="currentScore">
+                <mat-option *ngFor="let sc of scoreSelection" [value]="sc">{{sc}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions class="btnPanel">
+        <button mat-raised-button color="primary" (click)="submit()">送出</button>
+        <button mat-raised-button color="accent" (click)="cancel()">返回</button>
+    </div>
+
+    <div class="spinner" *ngIf="loading">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>

@@ -8,6 +8,7 @@ import { Classroom203 } from '../classroom-define/Classroom203';
 import { ClassroomRendererComponent } from '../classroom-renderer/classroom-renderer.component';
 import { ClassroomObject } from '../ClassroomObject';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ManualInsertDialogComponent } from '../manual-insert-dialog/manual-insert-dialog.component';
 import { ClassroomService } from '../service/classroom-service.service';
 
 @Component({
@@ -99,6 +100,17 @@ export class ClassroomManageComponent implements OnInit, OnDestroy {
           infoDialog: true
         }
       });
+    });
+  }
+
+  manual() {
+    this.dialog.open(ManualInsertDialogComponent, {
+      width: '350px',
+      height: '300px',
+      data: {
+        currentSession: this.currentSession,
+        currentSessionId: this.currentSessionId
+      }
     });
   }
 

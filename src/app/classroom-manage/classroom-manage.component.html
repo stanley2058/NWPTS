@@ -13,11 +13,14 @@
             <mat-form-field appearance="fill" class="selection">
                 <mat-label>本次題數</mat-label>
                 <mat-select [(value)]="currentScore">
-                <mat-option *ngFor="let sc of scoreSelection" [value]="sc">{{sc}}</mat-option>
+                    <mat-option *ngFor="let sc of scoreSelection" [value]="sc">{{sc}}</mat-option>
                 </mat-select>
             </mat-form-field>
 
-            <button mat-raised-button color="primary" (click)="submit()">送出</button>
+            <div>
+                <button mat-raised-button color="primary" (click)="submit()">送出</button>
+                <button mat-raised-button color="accent" (click)="manual()">手動新增</button>
+            </div>
         </div>
 
         <div class="waitingDisplay">

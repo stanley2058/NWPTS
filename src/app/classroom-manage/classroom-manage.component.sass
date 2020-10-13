@@ -4,15 +4,18 @@ nav
     width: 80vw
     left: 11.5vw
     display: grid
-    grid-template-columns: 150px 1fr
+    grid-template-columns: 200px 1fr
     grid-template-areas: "sel num" "act num"
 
     .selection
         grid-area: sel
-        max-width: 150px
+        max-width: 200px
     .action
         grid-area: act
-        max-width: 150px
+        max-width: 200px
+        div
+            display: flex
+            justify-content: space-between
     .waitingDisplay
         padding-top: 20px
         grid-area: num
